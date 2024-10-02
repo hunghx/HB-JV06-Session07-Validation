@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ra.academy.model.RegisterForm;
 import ra.academy.validation.RegisterFormValidator;
 
+import javax.validation.Valid;
+
 @Controller
 public class AuthController {
     @Autowired
@@ -22,9 +24,9 @@ public class AuthController {
         return "register";
     }
     @PostMapping("/sign-up")
-    public String signUp(@ModelAttribute("formRegister") RegisterForm request, BindingResult result, Model model) {
+    public String signUp(@Valid @ModelAttribute("formRegister") RegisterForm request, BindingResult result, Model model) {
         model.addAttribute("formRegister",request);
-        validator.validate(request,result);
+//        validator.validate(request,result);
         // xử lí dữ liệu
         if(result.hasErrors()) { // kiemr tra xem co lỗi nào hay ko
             // trả về giao diên cũ va hiện thị lỗi
